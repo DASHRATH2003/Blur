@@ -7,6 +7,10 @@ import homepage2 from "../assets/homepage2.webp";
 import homepage3 from "../assets/homepage3.webp";
 import homepage4 from "../assets/homepage4.webp";
 import { PlayIcon as SolidPlayIcon } from "@heroicons/react/24/solid";
+import discoveryImg from "../assets/Discovery.jpg";
+import luxuryImg from "../assets/Laxury.jpeg";
+import foreveryImg from "../assets/Forevery.jpg";
+import loveImg from "../assets/love.webp";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -22,22 +26,22 @@ const Home = () => {
     {
       title: "Discover Your Signature Scent",
       description: "Explore our collection of unique fragrances crafted to express your personality.",
-      image: "/src/assets/Discovery.jpg",
+      image: discoveryImg,
     },
     {
       title: "Luxury in Every Drop",
       description: "Experience the art of perfumery with our premium collection.",
-      image: "/src/assets/Laxury.jpeg",
+      image: luxuryImg,
     },
     {
       title: "For Every Moment",
       description: "From day to night, find the perfect scent for every occasion.",
-      image: "/src/assets/Forevery.jpg",
+      image: foreveryImg,
     },
     {
       title: "Crafted with Love",
       description: "Each fragrance tells a story, what will yours be?",
-      image: "/src/assets/love.webp",
+      image: loveImg,
     },
   ];
 
