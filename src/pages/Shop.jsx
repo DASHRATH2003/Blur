@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { fragranceCollections } from '../data/fragrances';
 import { useSearch } from '../context/SearchContext';
+import { useCart } from '../context/CartContext';
 
-const Shop = ({ category }) => {
-  const [selectedCategory, setSelectedCategory] = useState(category || 'all');
+const Shop = () => {
+  const [searchParams] = useSearchParams();
+  const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('newest');
   const { searchQuery } = useSearch();
+  const { addToCart } = useCart();
 
+  // Update category when URL parameter changes
   useEffect(() => {
-    if (category) {
-      setSelectedCategory(category);
+    const categoryFromUrl = searchParams.get('category');
+    if (categoryFromUrl && ['mens', 'womens', 'sugar'].includes(categoryFromUrl)) {
+      setSelectedCategory(categoryFromUrl);
+    } else {
+      setSelectedCategory('all');
     }
-  }, [category]);
+  }, [searchParams]);
 
   // Get products based on category and search query
   const getProducts = () => {
@@ -78,6 +85,11 @@ const Shop = ({ category }) => {
     { value: 'price-high', label: 'Price: High to Low' },
     { value: 'name-asc', label: 'Name: A to Z' }
   ];
+
+  const handleAddToCart = (e, product) => {
+    e.preventDefault();
+    addToCart(product);
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -160,7 +172,10 @@ const Shop = ({ category }) => {
                       <div className="mt-2">
                         <span className="text-lg font-medium text-gray-900">₹{product.price}</span>
                       </div>
-                      <button className="mt-4 w-full bg-black text-white py-2 px-4 text-sm font-medium hover:bg-gray-800 transition-colors duration-200 rounded">
+                      <button 
+                        onClick={(e) => handleAddToCart(e, product)}
+                        className="mt-4 w-full bg-black text-white py-2 px-4 text-sm font-medium hover:bg-pink-500 transition-colors duration-200 rounded"
+                      >
                         ADD TO CART
                       </button>
                     </div>

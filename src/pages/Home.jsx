@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { ChevronLeftIcon, ChevronRightIcon, PlayIcon } from "@heroicons/react/24/outline";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  PlayIcon,
+} from "@heroicons/react/24/outline";
 import { fragranceCollections } from "../data/fragrances";
 import homepage1 from "../assets/homepage1.webp";
 import homepage2 from "../assets/homepage2.webp";
@@ -11,31 +15,43 @@ import discoveryImg from "../assets/Discovery.jpg";
 import luxuryImg from "../assets/Laxury.jpeg";
 import foreveryImg from "../assets/Forevery.jpg";
 import loveImg from "../assets/love.webp";
+import perfume1 from "../assets/perfumee2.jpg";
+import perfume2 from "../assets/perfume3.jpeg"; // Corrected here
+import perfume3 from "../assets/perfume4.jpg";
+import perfume4 from "../assets/perfume5.webp";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [videoError, setVideoError] = useState(false);
-  const [videoMessage, setVideoMessage] = useState('');
+  const [videoMessage, setVideoMessage] = useState("");
+  const [showMoreImages, setShowMoreImages] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedPrice, setSelectedPrice] = useState('all');
+  const [selectedType, setSelectedType] = useState('all');
   const scrollContainerRef = useRef(null);
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
+  const [currentReview, setCurrentReview] = useState(0);
 
   const slides = [
     {
       title: "Discover Your Signature Scent",
-      description: "Explore our collection of unique fragrances crafted to express your personality.",
+      description:
+        "Explore our collection of unique fragrances crafted to express your personality.",
       image: discoveryImg,
     },
     {
       title: "Luxury in Every Drop",
-      description: "Experience the art of perfumery with our premium collection.",
+      description:
+        "Experience the art of perfumery with our premium collection.",
       image: luxuryImg,
     },
     {
       title: "For Every Moment",
-      description: "From day to night, find the perfect scent for every occasion.",
+      description:
+        "From day to night, find the perfect scent for every occasion.",
       image: foreveryImg,
     },
     {
@@ -48,7 +64,7 @@ const Home = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-    }, 5000);
+    }, 7000);
 
     return () => clearInterval(timer);
   }, [slides.length]);
@@ -83,42 +99,30 @@ const Home = () => {
   const FragranceCard = ({ fragrance }) => (
     <div className="w-[300px] group">
       <Link to={`/product/${fragrance.id}`}>
-        <div className="relative flex flex-col">
-          <div className="aspect-[3/4] bg-gray-100 rounded-lg overflow-hidden mb-4 group-hover:shadow-lg transition-shadow duration-300">
+        <div className="flex flex-col items-center">
+          {/* Image Container */}
+          <div className="w-full aspect-[1/1] bg-[#FFF5F7] rounded-lg overflow-hidden mb-4">
             <img
               src={fragrance.image}
               alt={fragrance.name}
-              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
+              className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-300"
             />
           </div>
-          <div className="flex flex-col space-y-2">
+
+          {/* Product Info - Centered */}
+          <div className="w-full text-center space-y-2">
             <h3 className="text-lg font-medium text-gray-900 group-hover:text-pink-500 transition-colors duration-200">
               {fragrance.name}
             </h3>
-            <p className="text-sm text-gray-500">{fragrance.description}</p>
-            <div className="flex flex-wrap gap-2">
-              {fragrance.vibe.map((tag, idx) => (
-                <span
-                  key={idx}
-                  className="px-2 py-1 bg-gray-100 text-xs text-gray-600 rounded-full"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+            <p className="text-sm text-gray-500 line-clamp-2">
+              {fragrance.description}
+            </p>
             <div className="mt-2">
-              <span className="text-lg font-medium text-gray-900">₹{fragrance.price}</span>
+              <span className="text-lg font-semibold text-gray-900">
+                ₹{fragrance.price}
+              </span>
             </div>
-            <div className="mt-2 space-y-2 text-xs text-gray-500">
-              <div className="flex items-center space-x-1">
-                <span className="font-medium">Family:</span>
-                <span>{fragrance.family}</span>
-              </div>
-              <div>
-                <span className="font-medium">Top Notes:</span> {fragrance.notes.top.join(', ')}
-              </div>
-            </div>
-            <button className="mt-4 w-full bg-black text-white py-2 px-4 text-sm font-medium hover:bg-gray-800 transition-colors duration-200 rounded">
+            <button className="w-full bg-black text-white py-2.5 px-4 text-sm font-medium hover:bg-pink-500 transition-colors duration-200 rounded-md">
               ADD TO CART
             </button>
           </div>
@@ -129,9 +133,18 @@ const Home = () => {
 
   // Combine all fragrances into a single array
   const allFragrances = [
-    ...fragranceCollections.mens.map(item => ({ ...item, collection: "Men's" })),
-    ...fragranceCollections.womens.map(item => ({ ...item, collection: "Women's" })),
-    ...fragranceCollections.sugar.map(item => ({ ...item, collection: "Sugar Muse" }))
+    ...fragranceCollections.mens.map((item) => ({
+      ...item,
+      collection: "Men's",
+    })),
+    ...fragranceCollections.womens.map((item) => ({
+      ...item,
+      collection: "Women's",
+    })),
+    ...fragranceCollections.sugar.map((item) => ({
+      ...item,
+      collection: "Sugar Muse",
+    })),
   ];
 
   // Homepage images array
@@ -139,7 +152,7 @@ const Home = () => {
     { image: homepage1, alt: "Homepage 1" },
     { image: homepage2, alt: "Homepage 2" },
     { image: homepage3, alt: "Homepage 3" },
-    { image: homepage4, alt: "Homepage 4" }
+    { image: homepage4, alt: "Homepage 4" },
   ];
 
   // Brand logos data
@@ -151,23 +164,63 @@ const Home = () => {
     { name: "Jo Malone", text: "JO MALONE" },
     { name: "Hermès", text: "HERMÈS" },
     { name: "Versace", text: "VERSACE" },
-    { name: "YSL", text: "YVES SAINT LAURENT" }
+    { name: "YSL", text: "YVES SAINT LAURENT" },
   ];
+
+  // Reviews data
+  const reviews = [
+    {
+      name: "A A R T I",
+      title: "LOVE THE FORMULA",
+      image: "/src/assets/perfume3.jpeg",
+      quotes: [
+        "Call me daddy has the perfect shades for day and night looks.",
+        "Branding, formulas, colors everything is on POINT!"
+      ]
+    },
+    {
+      name: "SARAH M.",
+      title: "AMAZING FRAGRANCE",
+      image: "/src/assets/perfume4.jpg",
+      quotes: [
+        "The scent is absolutely divine and long-lasting.",
+        "The packaging is luxurious and elegant!"
+      ]
+    },
+    {
+      name: "JESSICA K.",
+      title: "PERFECT CHOICE",
+      image: "/src/assets/perfume5.webp",
+      quotes: [
+        "This has become my signature scent.",
+        "I get compliments everywhere I go!"
+      ]
+    }
+  ];
+
+  // Auto rotate reviews
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentReview((prev) => (prev === reviews.length - 1 ? 0 : prev + 1));
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     // Log when component mounts
     console.log("Video component mounted");
-    
+
     // Check if video file exists
-    fetch('/videoperfume.mp4')
-      .then(response => {
+    fetch("/videoperfume.mp4")
+      .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         console.log("Video file exists and is accessible");
         setVideoMessage("Video file found successfully");
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error checking video file:", error);
         setVideoMessage(`Error finding video file: ${error.message}`);
         setVideoError(true);
@@ -179,14 +232,16 @@ const Home = () => {
     console.error("Video error:", e);
     const video = videoRef.current;
     let errorMessage = "Error loading video. ";
-    
+
     if (video) {
       errorMessage += `Network State: ${video.networkState}, `;
       errorMessage += `Ready State: ${video.readyState}, `;
-      errorMessage += `Error Code: ${video.error ? video.error.code : 'none'}, `;
-      errorMessage += `Source: ${video.currentSrc || 'none'}`;
+      errorMessage += `Error Code: ${
+        video.error ? video.error.code : "none"
+      }, `;
+      errorMessage += `Source: ${video.currentSrc || "none"}`;
     }
-    
+
     setVideoMessage(errorMessage);
     setVideoError(true);
   };
@@ -195,8 +250,8 @@ const Home = () => {
   const handleVideoLoaded = () => {
     console.log("Video loaded successfully");
     setVideoError(false);
-    setVideoMessage('Video loaded successfully!');
-    
+    setVideoMessage("Video loaded successfully!");
+
     // Try to play the video
     const playVideo = async () => {
       try {
@@ -207,7 +262,7 @@ const Home = () => {
         setVideoMessage(`Error playing video: ${err.message}`);
       }
     };
-    
+
     playVideo();
   };
 
@@ -235,13 +290,53 @@ const Home = () => {
     }
   };
 
+  // Instagram feed images
+  const instagramImages = [
+    // Initial 6 images
+    { src: "/src/assets/homepage1.webp", alt: "Instagram post 1" },
+    { src: "/src/assets/homepage2.webp", alt: "Instagram post 2" },
+    { src: "/src/assets/homepage3.webp", alt: "Instagram post 3" },
+    { src: "/src/assets/homepage4.webp", alt: "Instagram post 4" },
+    { src: "/src/assets/perfume3.jpeg", alt: "Instagram post 5" },
+    { src: "/src/assets/perfume4.jpg", alt: "Instagram post 6" },
+    // Additional images shown when "Load more" is clicked
+    { src: "/src/assets/perfumee2.jpg", alt: "Instagram post 7" },
+    { src: "/src/assets/perfume5.webp", alt: "Instagram post 8" },
+    { src: "/src/assets/Luxuryperfume.jpeg", alt: "Instagram post 9" },
+    { src: "/src/assets/Midashrush.jpeg", alt: "Instagram post 10" },
+    { src: "/src/assets/midnight.jpeg", alt: "Instagram post 11" },
+    { src: "/src/assets/nacture.jpeg", alt: "Instagram post 12" }
+  ];
+
+  // Filter categories
+  const filterCategories = {
+    type: [
+      { id: 'all', name: 'All Types' },
+      { id: 'perfume', name: 'Perfumes' },
+      { id: 'mist', name: 'Body Mists' },
+      { id: 'cologne', name: 'Colognes' }
+    ],
+    category: [
+      { id: 'all', name: 'All Categories' },
+      { id: 'mens', name: "Men's Collection" },
+      { id: 'womens', name: "Women's Collection" },
+      { id: 'unisex', name: 'Unisex' }
+    ],
+    price: [
+      { id: 'all', name: 'All Prices' },
+      { id: 'under1000', name: 'Under ₹1,000' },
+      { id: '1000-2000', name: '₹1,000 - ₹2,000' },
+      { id: 'over2000', name: 'Over ₹2,000' }
+    ]
+  };
+
   return (
     <div className="space-y-16">
       {/* Hero Section with Carousel */}
       <div className="relative bg-white h-[500px] overflow-hidden">
         {/* Carousel Container */}
         <div
-          className="flex transition-transform duration-500 ease-out h-full"
+          className="flex transition-transform duration-1000 ease-in-out h-full"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         >
           {slides.map((slide) => (
@@ -292,18 +387,22 @@ const Home = () => {
       </div>
 
       {/* Video Section with Cover Design */}
-      
+
       {/* All Collections in Single Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="space-y-8">
           <section>
             <div className="flex items-center justify-between mb-8 -mt-16 ">
               <div>
-                <h2 className="text-3xl font-bold text-gray-900  ">All Collections</h2>
-                <p className="mt-2 text-gray-500">Explore our complete range of fragrances</p>
+                <h2 className="text-3xl font-bold text-gray-900  ">
+                  All Collections
+                </h2>
+                <p className="mt-2 text-gray-500">
+                  Explore our complete range of fragrances
+                </p>
               </div>
-              <Link 
-                to="/shop" 
+              <Link
+                to="/shop"
                 className="text-pink-500 hover:text-pink-600 font-medium flex items-center"
               >
                 View All →
@@ -330,14 +429,14 @@ const Home = () => {
       {/* Homepage Images Gallery */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <div className="relative">
-          <div 
+          <div
             ref={scrollContainerRef}
             className="overflow-x-auto hide-scrollbar scroll-smooth"
           >
             <div className="inline-flex space-x-4">
               {[...homepageImages, ...homepageImages].map((item, index) => (
-                <div 
-                  key={index} 
+                <div
+                  key={index}
                   className="w-[calc(50vw-2rem)] max-w-[600px] flex-shrink-0"
                 >
                   <div className="aspect-[16/9] bg-gray-100 rounded-lg overflow-hidden">
@@ -391,18 +490,21 @@ const Home = () => {
 
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Experience Our Latest Collection</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            Experience Our Latest Collection
+          </h2>
           <div className="flex justify-center space-x-4 mb-6">
             <div className="w-16 h-[2px] bg-pink-200"></div>
             <div className="w-16 h-[2px] bg-pink-300"></div>
             <div className="w-16 h-[2px] bg-pink-400"></div>
           </div>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Discover the art of perfumery through our curated collection of exquisite fragrances
+            Discover the art of perfumery through our curated collection of
+            exquisite fragrances
           </p>
         </div>
 
-        <div 
+        <div
           className="relative rounded-lg overflow-hidden shadow-xl cursor-pointer transition-all duration-500"
           onClick={handleVideoClick}
         >
@@ -421,7 +523,8 @@ const Home = () => {
                     Watch Our Story
                   </h3>
                   <p className="text-gray-600 max-w-md mx-auto">
-                    Click to explore the artistry and passion behind our exclusive fragrance collection
+                    Click to explore the artistry and passion behind our
+                    exclusive fragrance collection
                   </p>
                 </div>
               </div>
@@ -429,26 +532,31 @@ const Home = () => {
           )}
 
           {/* Video (hidden initially) */}
-          <div className={`transition-all duration-500 ${showVideo ? 'opacity-100' : 'opacity-0 hidden'}`}>
-            <video 
+          <div
+            className={`transition-all duration-500 ${
+              showVideo ? "opacity-100" : "opacity-0 hidden"
+            }`}
+          >
+            <video
               ref={videoRef}
               className="w-full h-auto"
-              loop 
-              muted 
+              loop
+              muted
               playsInline
               controls={isPlaying}
               preload="auto"
               onError={handleVideoError}
               onLoadedData={handleVideoLoaded}
             >
-              <source 
-                src="videoperfume.mp4" 
-                type="video/mp4" 
-              />
+              <source src="videoperfume.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             {videoMessage && (
-              <div className={`text-center mt-2 p-2 ${videoError ? 'text-red-500' : 'text-green-500'}`}>
+              <div
+                className={`text-center mt-2 p-2 ${
+                  videoError ? "text-red-500" : "text-green-500"
+                }`}
+              >
                 {videoMessage}
               </div>
             )}
@@ -456,32 +564,405 @@ const Home = () => {
         </div>
       </div>
 
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 overflow-x-auto">
+        <div className="flex gap-6 w-max">
+          {allFragrances.slice(0, 6).map((fragrance) => (
+            <Link
+              key={fragrance.id}
+              to={`/product/${fragrance.id}`}
+              className="min-w-[250px] group"
+            >
+              <div className="bg-[#FFF5F7] rounded-lg p-4 aspect-square flex items-center justify-center">
+                <img
+                  src={fragrance.image}
+                  alt={fragrance.name}
+                  className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div className="mt-4 text-center">
+                <h3 className="text-sm font-medium text-gray-900 group-hover:text-pink-500 transition-colors duration-200">
+                  {fragrance.name}
+                </h3>
+                <p className="mt-1 text-sm font-medium text-gray-900">
+                  ₹{fragrance.price}
+                </p>
+                <button className="mt-2 w-full bg-black text-white py-2 px-4 text-xs font-medium hover:bg-pink-500 transition-colors duration-200 rounded-md">
+                  ADD TO CART
+                </button>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
 
-      {/* Newsletter Section */}
+      {/* Customer Reviews Section */}
+      
+
+      {/* Bottom Products Showcase */}
+      <div className="w-full bg-pink-50">
+        <div className="max-w-7xl mx-auto flex">
+          {/* Left Image Side */}
+          <div className="w-1/2 relative h-[400px] overflow-hidden">
+            <div
+              className="flex transition-transform duration-500 ease-out h-full"
+              style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+            >
+              {[perfume1, perfume2, perfume3, perfume4].map((image, index) => (
+                <div key={index} className="w-full h-full flex-shrink-0">
+                  <img
+                    src={image}
+                    alt={`Perfume ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+            
+            {/* Navigation Arrows */}
+            <div className="absolute bottom-8 left-8 flex space-x-4">
+             
+             
+            </div>
+            
+            {/* Slide Counter */}
+            
+          </div>
+
+          {/* Right Content Side */}
+          <div className="w-1/2 flex flex-col justify-center items-start p-16">
+            <h2 className="text-4xl font-bold tracking-tight text-gray-900 mb-4">
+              Featured Collection
+            </h2>
+            <p className="text-lg text-gray-600 mb-8 max-w-md">
+              Discover our handpicked selection of luxury fragrances, crafted for those who appreciate the art of perfumery.
+            </p>
+            <Link
+              to="/shop"
+              className="inline-block bg-black hover:bg-pink-600 text-white py-4 px-12 text-lg font-medium transition-colors duration-200 rounded uppercase tracking-wider"
+            >
+              Shop Now
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full bg-white py-16">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <p className="text-sm font-medium text-gray-600 uppercase tracking-wider">TESTIMONIAL</p>
+            <h2 className="mt-2 text-4xl font-bold text-gray-900">Customer Reviews</h2>
+          </div>
+
+          <div className="relative overflow-hidden">
+            <div 
+              className="transition-transform duration-1000 ease-in-out"
+              style={{ transform: `translateX(-${currentReview * 100}%)` }}
+            >
+              <div className="flex">
+                {reviews.map((review, index) => (
+                  <div 
+                    key={index}
+                    className="w-full flex-shrink-0"
+                  >
+                    <div className="bg-pink-50 p-8 rounded-lg">
+                      <div className="flex flex-col md:flex-row items-center justify-center gap-8">
+                        <div className="w-32 h-32 flex-shrink-0">
+                          <img
+                            src={review.image}
+                            alt={`Customer ${review.name}`}
+                            className="w-full h-full object-cover rounded-full"
+                          />
+                        </div>
+                        <div className="text-center md:text-left max-w-xl">
+                          <h3 className="text-2xl font-bold text-gray-900 mb-4">{review.title}</h3>
+                          {review.quotes.map((quote, i) => (
+                            <p key={i} className="text-xl text-gray-700 mb-4">
+                              "{quote}"
+                            </p>
+                          ))}
+                          <p className="font-medium text-gray-900 text-lg">- {review.name}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Navigation Dots */}
+            <div className="flex justify-center mt-6 space-x-2">
+              {reviews.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentReview(index)}
+                  className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                    currentReview === index ? 'w-6 bg-black' : 'bg-gray-300'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="bg-gray-100">
         <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
+          
+          {/* Ingredients/Features Section */}
+          <div className="max-w-6xl mx-auto mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {/* Jojoba Oil */}
+              <div className="text-center">
+                <div className="w-32 h-32 mx-auto mb-4 bg-pink-50 rounded-full overflow-hidden p-4">
+                  <img
+                    src="/src/assets/perfume5.webp"
+                    alt="Jojoba Oil"
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
+                <h3 className="text-lg font-bold mb-2">JOJOBA OIL</h3>
+                <p className="text-gray-600 text-sm">
+                  Absorbs quickly into your lips to soften and smooth without leaving a greasy film.
+                </p>
+              </div>
+
+              {/* Avacado Oil */}
+              <div className="text-center">
+                <div className="w-32 h-32 mx-auto mb-4 bg-pink-50 rounded-full overflow-hidden p-4">
+                  <img
+                    src="/src/assets/perfumee2.jpg"
+                    alt="Avacado Oil"
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
+                <h3 className="text-lg font-bold mb-2">AVACADO OIL</h3>
+                <p className="text-gray-600 text-sm">
+                  Prevent chapping and dryness, its rich antioxidants promote healthy-looking lips with a natural glow.
+                </p>
+              </div>
+
+              {/* Ozokorite */}
+              <div className="text-center">
+                <div className="w-32 h-32 mx-auto mb-4 bg-pink-50 rounded-full overflow-hidden p-4">
+                  <img
+                    src="/src/assets/perfume3.jpeg"
+                    alt="Ozokorite"
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
+                <h3 className="text-lg font-bold mb-2">OZOKORITE</h3>
+                <p className="text-gray-600 text-sm">
+                  Smooth and creamy texture provides effortless applications, leaving lips with a velvety finish.
+                </p>
+              </div>
+
+              {/* Shea Butter */}
+              <div className="text-center">
+                <div className="w-32 h-32 mx-auto mb-4 bg-pink-50 rounded-full overflow-hidden p-4">
+                  <img
+                    src="/src/assets/perfume4.jpg"
+                    alt="Shea Butter"
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
+                <h3 className="text-lg font-bold mb-2">SHEA BUTTER</h3>
+                <p className="text-gray-600 text-sm">
+                  Moisturizes and nourishes the lips, preventing dryness and flakiness.
+                </p>
+              </div>
+            </div>
+
+            <div className="text-center mt-12">
+              <p className="text-gray-600 italic">Psst...we also send love notes via emails ;)</p>
+            </div>
+          </div>
+
+          {/* Email Signup Section */}
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-extrabold text-gray-900">
-              Subscribe to our newsletter
+            <h2 className="text-3xl font-bold mb-8">
+              SECRET CODES, FREE GIFTS AND ALL THAT JAZZ FOR OUR PEOPLE IN OUR EMAIL LIST
             </h2>
-            <p className="mt-4 text-lg text-gray-600">
-              Get the latest updates on new products and upcoming sales.
-            </p>
-            <div className="mt-8 flex justify-center">
-              <div className="inline-flex rounded-md shadow">
+            <div className="max-w-md mx-auto">
+              <div className="flex flex-col space-y-4">
                 <input
                   type="email"
-                  className="px-5 py-3 border border-transparent text-base font-medium rounded-l-md text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-                  placeholder="Enter your email"
+                  placeholder="Email"
+                  className="px-6 py-3 border border-gray-300 rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-pink-500"
                 />
-                <button className="px-5 py-3 border border-transparent text-base font-medium rounded-r-md text-white bg-purple-600 hover:bg-purple-700">
-                  Subscribe
+                <button className="bg-pink-200 hover:bg-pink-300 text-black py-3 px-6 rounded-md font-medium transition-colors duration-200">
+                  SUBMIT NOW
                 </button>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Instagram Feed Section */}
+      <div className="w-full bg-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900">Follow us on Instagram</h2>
+            <p className="mt-2 text-lg text-gray-600">Trending products</p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {[
+              { src: "/src/assets/homepage1.webp", alt: "Instagram post 1" },
+              { src: "/src/assets/homepage2.webp", alt: "Instagram post 2" },
+              { src: "/src/assets/homepage3.webp", alt: "Instagram post 3" },
+              { src: "/src/assets/homepage4.webp", alt: "Instagram post 4" },
+              { src: "/src/assets/perfume3.jpeg", alt: "Instagram post 5" },
+              { src: "/src/assets/perfume4.jpg", alt: "Instagram post 6" },
+              { src: "/src/assets/perfumee2.jpg", alt: "Instagram post 7" },
+              { src: "/src/assets/perfume5.webp", alt: "Instagram post 8" },
+              { src: "/src/assets/Luxuryperfume.jpeg", alt: "Instagram post 9" },
+              { src: "/src/assets/Midashrush.jpeg", alt: "Instagram post 10" },
+              { src: "/src/assets/midnight.jpeg", alt: "Instagram post 11" },
+              { src: "/src/assets/nacture.jpeg", alt: "Instagram post 12" }
+            ].slice(0, showMoreImages ? 12 : 6).map((image, index) => (
+              <div key={index} className="relative group overflow-hidden aspect-square">
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300"></div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-8">
+            <button 
+              onClick={() => setShowMoreImages(!showMoreImages)}
+              className="bg-pink-100 hover:bg-pink-200 text-black px-8 py-3 rounded-md font-medium transition-colors duration-200"
+            >
+              {showMoreImages ? 'Show Less' : 'Load more'}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Filter Section */}
+      <div className="w-full bg-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900">Our Collection</h2>
+            <p className="mt-2 text-lg text-gray-600">Find your perfect fragrance</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            {/* Type Filter */}
+            <div className="space-y-4">
+              <h3 className="font-medium text-gray-900">Type</h3>
+              <div className="flex flex-wrap gap-2">
+                {filterCategories.type.map((type) => (
+                  <button
+                    key={type.id}
+                    onClick={() => setSelectedType(type.id)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 
+                      ${selectedType === type.id 
+                        ? 'bg-black text-white' 
+                        : 'bg-gray-100 text-gray-800 hover:bg-gray-200'}`}
+                  >
+                    {type.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Category Filter */}
+            <div className="space-y-4">
+              <h3 className="font-medium text-gray-900">Category</h3>
+              <div className="flex flex-wrap gap-2">
+                {filterCategories.category.map((cat) => (
+                  <button
+                    key={cat.id}
+                    onClick={() => setSelectedCategory(cat.id)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 
+                      ${selectedCategory === cat.id 
+                        ? 'bg-black text-white' 
+                        : 'bg-gray-100 text-gray-800 hover:bg-gray-200'}`}
+                  >
+                    {cat.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Price Filter */}
+            <div className="space-y-4">
+              <h3 className="font-medium text-gray-900">Price Range</h3>
+              <div className="flex flex-wrap gap-2">
+                {filterCategories.price.map((price) => (
+                  <button
+                    key={price.id}
+                    onClick={() => setSelectedPrice(price.id)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 
+                      ${selectedPrice === price.id 
+                        ? 'bg-black text-white' 
+                        : 'bg-gray-100 text-gray-800 hover:bg-gray-200'}`}
+                  >
+                    {price.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Additional Features */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div className="flex items-center gap-3 p-4 bg-pink-50 rounded-lg">
+              <div className="w-12 h-12 flex items-center justify-center bg-pink-100 rounded-full">
+                <svg className="w-6 h-6 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 12H4"/>
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-medium text-gray-900">Free Shipping</h3>
+                <p className="text-sm text-gray-500">On orders over ₹999</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3 p-4 bg-pink-50 rounded-lg">
+              <div className="w-12 h-12 flex items-center justify-center bg-pink-100 rounded-full">
+                <svg className="w-6 h-6 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-medium text-gray-900">Authenticity</h3>
+                <p className="text-sm text-gray-500">100% genuine products</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3 p-4 bg-pink-50 rounded-lg">
+              <div className="w-12 h-12 flex items-center justify-center bg-pink-100 rounded-full">
+                <svg className="w-6 h-6 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-medium text-gray-900">Secure Payment</h3>
+                <p className="text-sm text-gray-500">100% secure checkout</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3 p-4 bg-pink-50 rounded-lg">
+              <div className="w-12 h-12 flex items-center justify-center bg-pink-100 rounded-full">
+                <svg className="w-6 h-6 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-medium text-gray-900">Easy Returns</h3>
+                <p className="text-sm text-gray-500">10-day return policy</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   );
 };

@@ -3,6 +3,11 @@ import oxford from '../assets/oxfordblue.jpeg';
 import midnight from '../assets/midnight.jpeg';
 import nacture from '../assets/nacture.jpeg';
 import middush from '../assets/Midashrush.jpeg';
+import perfume3 from '../assets/perfume3.jpeg';
+import perfume4 from '../assets/perfume4.jpg';
+import perfume5 from '../assets/perfume5.webp';
+import luxuryPerfume from '../assets/Luxuryperfume.jpeg';
+
 export const fragranceCollections = {
   mens: [
     {
@@ -18,7 +23,10 @@ export const fragranceCollections = {
       family: 'Fruity Woody',
       vibe: ['Sophisticated', 'Powerful', 'Timeless'],
       image: regent1,
-      price: 999
+      price: 999,
+      isBestseller: true,
+      rating: 4.8,
+      reviews: 256
     },
     {
       id: 'm2',
@@ -94,8 +102,11 @@ export const fragranceCollections = {
       },
       family: 'Gourmand Floral',
       vibe: ['Sensual', 'Addictive', 'Glamorous'],
-      image: '/images/midnight-bloom.jpg',
-      price: 899
+      image: perfume3,
+      price: 899,
+      isBestseller: true,
+      rating: 4.9,
+      reviews: 312
     },
     {
       id: 'w2',
@@ -109,8 +120,10 @@ export const fragranceCollections = {
       },
       family: 'Floral Fruity',
       vibe: ['Elegant', 'Playful', 'Bold'],
-      image: '/images/velvet-heel.jpg',
-      price: 799
+      image: perfume4,
+      price: 799,
+      rating: 4.6,
+      reviews: 178
     },
     {
       id: 'w3',
@@ -124,8 +137,10 @@ export const fragranceCollections = {
       },
       family: 'Fruity Floral',
       vibe: ['Vibrant', 'Flirty', 'Radiant'],
-      image: '/images/crush-amour.jpg',
-      price: 799
+      image: perfume5,
+      price: 799,
+      rating: 4.5,
+      reviews: 145
     },
     {
       id: 'w4',
@@ -139,8 +154,11 @@ export const fragranceCollections = {
       },
       family: 'Chypre Floral',
       vibe: ['Chic', 'Modern', 'Feminine'],
-      image: '/images/parisian-muse.jpg',
-      price: 899
+      image: luxuryPerfume,
+      price: 899,
+      isBestseller: true,
+      rating: 4.8,
+      reviews: 234
     },
     {
       id: 'w5',
@@ -171,8 +189,11 @@ export const fragranceCollections = {
       },
       family: 'Gourmand Amber',
       vibe: ['Cozy', 'Luxe', 'Addictive'],
-      image: '/images/sugar-oud.jpg',
-      price: 799
+      image: perfume3,
+      price: 799,
+      isBestseller: true,
+      rating: 4.7,
+      reviews: 189
     },
     {
       id: 's2',
@@ -235,4 +256,14 @@ export const fragranceCollections = {
       price: 799
     }
   ]
+};
+
+// Helper function to get bestsellers
+export const getBestsellers = () => {
+  const allProducts = [
+    ...fragranceCollections.mens,
+    ...fragranceCollections.womens,
+    ...fragranceCollections.sugar
+  ];
+  return allProducts.filter(product => product.isBestseller);
 }; 
