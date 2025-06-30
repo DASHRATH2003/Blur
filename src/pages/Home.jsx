@@ -16,9 +16,13 @@ import luxuryImg from "../assets/Laxury.jpeg";
 import foreveryImg from "../assets/Forevery.jpg";
 import loveImg from "../assets/love.webp";
 import perfume1 from "../assets/perfumee2.jpg";
-import perfume2 from "../assets/perfume3.jpeg"; // Corrected here
+import perfume2 from "../assets/perfume3.jpeg";
 import perfume3 from "../assets/perfume4.jpg";
 import perfume4 from "../assets/perfume5.webp";
+import perfume5 from "../assets/Luxuryperfume.jpeg";
+import perfume6 from "../assets/Midashrush.jpeg";
+import perfume7 from "../assets/midnight.jpeg";
+import perfume8 from "../assets/nacture.jpeg";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -290,22 +294,19 @@ const Home = () => {
     }
   };
 
-  // Instagram feed images
   const instagramImages = [
-    // Initial 6 images
-    { src: "/src/assets/homepage1.webp", alt: "Instagram post 1" },
-    { src: "/src/assets/homepage2.webp", alt: "Instagram post 2" },
-    { src: "/src/assets/homepage3.webp", alt: "Instagram post 3" },
-    { src: "/src/assets/homepage4.webp", alt: "Instagram post 4" },
-    { src: "/src/assets/perfume3.jpeg", alt: "Instagram post 5" },
-    { src: "/src/assets/perfume4.jpg", alt: "Instagram post 6" },
-    // Additional images shown when "Load more" is clicked
-    { src: "/src/assets/perfumee2.jpg", alt: "Instagram post 7" },
-    { src: "/src/assets/perfume5.webp", alt: "Instagram post 8" },
-    { src: "/src/assets/Luxuryperfume.jpeg", alt: "Instagram post 9" },
-    { src: "/src/assets/Midashrush.jpeg", alt: "Instagram post 10" },
-    { src: "/src/assets/midnight.jpeg", alt: "Instagram post 11" },
-    { src: "/src/assets/nacture.jpeg", alt: "Instagram post 12" }
+    { src: homepage1, alt: "Instagram post 1" },
+    { src: homepage2, alt: "Instagram post 2" },
+    { src: homepage3, alt: "Instagram post 3" },
+    { src: homepage4, alt: "Instagram post 4" },
+    { src: perfume2, alt: "Instagram post 5" },
+    { src: perfume3, alt: "Instagram post 6" },
+    { src: perfume1, alt: "Instagram post 7" },
+    { src: perfume4, alt: "Instagram post 8" },
+    { src: perfume5, alt: "Instagram post 9" },
+    { src: perfume6, alt: "Instagram post 10" },
+    { src: perfume7, alt: "Instagram post 11" },
+    { src: perfume8, alt: "Instagram post 12" }
   ];
 
   // Filter categories
@@ -807,20 +808,7 @@ const Home = () => {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {[
-              { src: "/src/assets/homepage1.webp", alt: "Instagram post 1" },
-              { src: "/src/assets/homepage2.webp", alt: "Instagram post 2" },
-              { src: "/src/assets/homepage3.webp", alt: "Instagram post 3" },
-              { src: "/src/assets/homepage4.webp", alt: "Instagram post 4" },
-              { src: "/src/assets/perfume3.jpeg", alt: "Instagram post 5" },
-              { src: "/src/assets/perfume4.jpg", alt: "Instagram post 6" },
-              { src: "/src/assets/perfumee2.jpg", alt: "Instagram post 7" },
-              { src: "/src/assets/perfume5.webp", alt: "Instagram post 8" },
-              { src: "/src/assets/Luxuryperfume.jpeg", alt: "Instagram post 9" },
-              { src: "/src/assets/Midashrush.jpeg", alt: "Instagram post 10" },
-              { src: "/src/assets/midnight.jpeg", alt: "Instagram post 11" },
-              { src: "/src/assets/nacture.jpeg", alt: "Instagram post 12" }
-            ].slice(0, showMoreImages ? 12 : 6).map((image, index) => (
+            {instagramImages.slice(0, showMoreImages ? 12 : 6).map((image, index) => (
               <div key={index} className="relative group overflow-hidden aspect-square">
                 <img
                   src={image.src}
