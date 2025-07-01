@@ -6,6 +6,11 @@ import { TrashIcon, MinusIcon, PlusIcon } from '@heroicons/react/24/outline';
 const Cart = () => {
   const { cartItems, removeFromCart, updateQuantity, getTotalPrice, clearCart } = useCart();
 
+  // Convert rupees to pounds
+  const convertToPounds = (rupees) => {
+    return (rupees * 0.0096).toFixed(2);
+  };
+
   if (cartItems.length === 0) {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -81,7 +86,7 @@ const Cart = () => {
                           </button>
                         </div>
                         <p className="text-lg font-medium text-gray-900">
-                          ₹{(item.price * item.quantity).toLocaleString()}
+                          £{convertToPounds(item.price * item.quantity)}
                         </p>
                       </div>
                     </div>
@@ -110,13 +115,13 @@ const Cart = () => {
             <div className="space-y-4">
               <div className="flex justify-between">
                 <span className="text-gray-600">Subtotal</span>
-                <span className="text-gray-900 font-medium">₹{getTotalPrice().toLocaleString()}</span>
+                <span className="text-gray-900 font-medium">£{convertToPounds(getTotalPrice())}</span>
               </div>
               
               <div className="flex justify-between">
                 <span className="text-gray-600">Shipping</span>
                 <span className="text-gray-900 font-medium">
-                  {getTotalPrice() >= 999 ? 'Free' : '₹99'}
+                  {getTotalPrice() >= 999 ? 'Free' : '£0.95'}
                 </span>
               </div>
 
@@ -124,7 +129,7 @@ const Cart = () => {
                 <div className="flex justify-between">
                   <span className="text-lg font-medium text-gray-900">Total</span>
                   <span className="text-lg font-medium text-gray-900">
-                    ₹{(getTotalPrice() + (getTotalPrice() >= 999 ? 0 : 99)).toLocaleString()}
+                    £{convertToPounds(getTotalPrice() + (getTotalPrice() >= 999 ? 0 : 99))}
                   </span>
                 </div>
               </div>

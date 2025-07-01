@@ -129,7 +129,7 @@ const GiftSets = () => {
         </div>
 
         <div className="flex items-center justify-between">
-          <span className="text-2xl font-bold text-gray-900">₹{set.price.toLocaleString()}</span>
+          <span className="text-2xl font-bold text-gray-900">£{(set.price * 0.0096).toFixed(2)}</span>
           <button 
             onClick={() => handleAddToCart(set)}
             className="bg-black text-white px-6 py-2 rounded-md hover:bg-pink-600 transition-colors duration-200 flex items-center space-x-2"

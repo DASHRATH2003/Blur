@@ -85,11 +85,11 @@ const Home = () => {
   }, [scrollPosition]);
 
   const FragranceCard = ({ fragrance }) => (
-    <div className="w-[300px] group">
+    <div className="w-[280px] md:w-[300px] group">
       <Link to={`/product/${fragrance.id}`}>
         <div className="flex flex-col items-center">
           {/* Image Container */}
-          <div className="w-full aspect-[1/1] bg-[#FFF5F7] rounded-lg overflow-hidden mb-4">
+          <div className="w-full aspect-[1/1] bg-[#FFF5F7] rounded-lg overflow-hidden mb-3">
             <img
               src={fragrance.image}
               alt={fragrance.name}
@@ -98,20 +98,20 @@ const Home = () => {
           </div>
 
           {/* Product Info - Centered */}
-          <div className="w-full text-center space-y-2">
-            <h3 className="text-lg font-medium text-gray-900 group-hover:text-pink-500 transition-colors duration-200">
+          <div className="w-full text-center space-y-1.5">
+            <h3 className="text-base md:text-lg font-medium text-gray-900 group-hover:text-pink-500 transition-colors duration-200">
               {fragrance.name}
             </h3>
-            <p className="text-sm text-gray-500 line-clamp-2">
+            <p className="text-xs md:text-sm text-gray-500 line-clamp-2 px-2">
               {fragrance.description}
             </p>
             <div className="mt-2">
-              <span className="text-lg font-semibold text-gray-900">
-                ₹{fragrance.price}
+              <span className="text-base md:text-lg font-semibold text-gray-900">
+                £{(fragrance.price * 0.0097).toFixed(2)}
               </span>
             </div>
-            <button className="w-full bg-black text-white py-2.5 px-4 text-sm font-medium hover:bg-pink-500 transition-colors duration-200 rounded-md">
-              ADD TO CART
+            <button className="w-full bg-black text-white py-2 px-4 text-xs font-medium hover:bg-pink-500 transition-colors duration-200 rounded-md">
+              Add to Cart
             </button>
           </div>
         </div>
@@ -137,10 +137,11 @@ const Home = () => {
 
   // Homepage images array
   const homepageImages = [
-    { image: "/images/homepage1.webp", alt: "Homepage 1" },
-    { image: "/images/homepage2.webp", alt: "Homepage 2" },
-    { image: "/images/homepage3.webp", alt: "Homepage 3" },
-    { image: "/images/homepage4.webp", alt: "Homepage 4" },
+    { image: "/images/perfume3.jpeg", alt: "Luxury Perfume 1" },
+    { image: "/images/perfume4.jpg", alt: "Luxury Perfume 2" },
+    { image: "/images/perfume5.webp", alt: "Luxury Perfume 3" },
+    { image: "/images/perfumee2.jpg", alt: "Luxury Perfume 4" },
+    { image: "/images/Luxuryperfume.jpeg", alt: "Luxury Perfume 5" }
   ];
 
   // Brand logos data
@@ -279,18 +280,18 @@ const Home = () => {
   };
 
   const instagramImages = [
-    { src: '/images/homepage1.webp', alt: 'Instagram post 1' },
-    { src: '/images/homepage2.webp', alt: 'Instagram post 2' },
-    { src: '/images/homepage3.webp', alt: 'Instagram post 3' },
-    { src: '/images/homepage4.webp', alt: 'Instagram post 4' },
-    { src: '/images/perfume3.jpeg', alt: 'Instagram post 5' },
-    { src: '/images/perfume4.jpg', alt: 'Instagram post 6' },
-    { src: '/images/perfumee2.jpg', alt: 'Instagram post 7' },
-    { src: '/images/perfume5.webp', alt: 'Instagram post 8' },
-    { src: '/images/Luxuryperfume.jpeg', alt: 'Instagram post 9' },
-    { src: '/images/Midashrush.jpeg', alt: 'Instagram post 10' },
-    { src: '/images/midnight.jpeg', alt: 'Instagram post 11' },
-    { src: '/images/nacture.jpeg', alt: 'Instagram post 12' }
+    { src: '/images/perfume3.jpeg', alt: 'Signature Perfume 1' },
+    { src: '/images/perfume4.jpg', alt: 'Signature Perfume 2' },
+    { src: '/images/perfume5.webp', alt: 'Signature Perfume 3' },
+    { src: '/images/perfumee2.jpg', alt: 'Luxury Collection 1' },
+    { src: '/images/Luxuryperfume.jpeg', alt: 'Luxury Collection 2' },
+    { src: '/images/Midashrush.jpeg', alt: 'Premium Collection 1' },
+    { src: '/images/midnight.jpeg', alt: 'Midnight Collection' },
+    { src: '/images/nacture.jpeg', alt: 'Nature Collection' },
+    { src: '/images/regent1.jpeg', alt: 'Regent Collection' },
+    { src: '/images/oxfordblue.jpeg', alt: 'Oxford Collection' },
+    { src: '/images/Laxury.jpeg', alt: 'Luxury Collection 3' },
+    { src: '/images/Discovery.jpg', alt: 'Discovery Collection' }
   ];
 
   // Filter categories
@@ -309,16 +310,16 @@ const Home = () => {
     ],
     price: [
       { id: 'all', name: 'All Prices' },
-      { id: 'under1000', name: 'Under ₹1,000' },
-      { id: '1000-2000', name: '₹1,000 - ₹2,000' },
-      { id: 'over2000', name: 'Over ₹2,000' }
+          { id: 'under10', name: 'Under £10' },
+    { id: '10-20', name: '£10 - £20' },
+    { id: 'over20', name: 'Over £20' }
     ]
   };
 
   return (
     <div className="space-y-16">
       {/* Hero Section with Carousel */}
-      <div className="relative bg-white h-[500px] overflow-hidden">
+      <div className="relative bg-white min-h-[400px] md:h-[500px] overflow-hidden">
         {/* Carousel Container */}
         <div
           className="flex transition-transform duration-1000 ease-in-out h-full"
@@ -327,14 +328,14 @@ const Home = () => {
           {slides.map((slide) => (
             <div
               key={slide.title}
-              className="w-full h-full flex-shrink-0 grid grid-cols-2"
+              className="w-full h-full flex-shrink-0 flex flex-col md:grid md:grid-cols-2"
             >
               {/* Left Content Side */}
-              <div className="flex flex-col justify-center items-start px-28 pt-8 pb-32 bg-white">
-                <h1 className="text-3xl md:text-2xl font-semibold tracking-tight text-gray-600 mb-3">
+              <div className="flex flex-col justify-center items-start p-6 md:px-28 pt-8 pb-8 md:pt-8 md:pb-32 bg-white order-2 md:order-1">
+                <h1 className="text-2xl md:text-3xl font-semibold tracking-tight text-gray-600 mb-3">
                   {slide.title}
                 </h1>
-                <h2 className="text-1xl md:text-1xl font-semibold tracking-tight text-gray-600 mb-6">
+                <h2 className="text-lg md:text-xl font-semibold tracking-tight text-gray-600 mb-6">
                   {slide.description}
                 </h2>
                 <Link
@@ -346,7 +347,7 @@ const Home = () => {
               </div>
 
               {/* Right Image Side */}
-              <div className="relative h-[350px]">
+              <div className="relative h-[250px] md:h-[350px] order-1 md:order-2">
                 <img
                   src={slide.image}
                   alt={slide.title}
@@ -358,7 +359,7 @@ const Home = () => {
         </div>
 
         {/* Navigation Dots */}
-        <div className="absolute top-96 left-1/2 transform -translate-x-1/2 flex space-x-1.5 z-30">
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-1.5 z-30">
           {slides.map((_, index) => (
             <button
               key={index}
@@ -371,15 +372,13 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Video Section with Cover Design */}
-
-      {/* All Collections in Single Section */}
+      {/* All Collections Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="space-y-8">
           <section>
-            <div className="flex items-center justify-between mb-8 -mt-16 ">
+            <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 -mt-8 md:-mt-16">
               <div>
-                <h2 className="text-3xl font-bold text-gray-900  ">
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
                   All Collections
                 </h2>
                 <p className="mt-2 text-gray-500">
@@ -388,14 +387,14 @@ const Home = () => {
               </div>
               <Link
                 to="/shop"
-                className="text-pink-500 hover:text-pink-600 font-medium flex items-center"
+                className="text-pink-500 hover:text-pink-600 font-medium flex items-center mt-4 md:mt-0"
               >
                 View All →
               </Link>
             </div>
             <div className="relative">
-              <div className="overflow-x-auto hide-scrollbar">
-                <div className="inline-flex space-x-8 pb-4">
+              <div className="overflow-x-auto hide-scrollbar -mx-4 px-4">
+                <div className="inline-flex space-x-4 md:space-x-8 pb-4">
                   {allFragrances.map((fragrance) => (
                     <div key={fragrance.id} className="relative">
                       <span className="absolute top-2 left-2 bg-black/75 text-white px-3 py-1 text-xs rounded-full">
@@ -413,30 +412,38 @@ const Home = () => {
 
       {/* Homepage Images Gallery */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <div className="relative">
+  <div className="relative">
+    <div
+      ref={scrollContainerRef}
+      className="overflow-x-auto hide-scrollbar scroll-smooth"
+    >
+      <div className="inline-flex space-x-4">
+        {homepageImages.map((item, index) => (
           <div
-            ref={scrollContainerRef}
-            className="overflow-x-auto hide-scrollbar scroll-smooth"
+            key={index}
+            className="w-[50vw] max-w-[400px] flex-shrink-0"
           >
-            <div className="inline-flex space-x-4">
-              {[...homepageImages, ...homepageImages].map((item, index) => (
-                <div
-                  key={index}
-                  className="w-[calc(50vw-2rem)] max-w-[600px] flex-shrink-0"
-                >
-                  <div className="aspect-[16/9] bg-gray-100 rounded-lg overflow-hidden">
-                    <img
-                      src={item.image}
-                      alt={item.alt}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-              ))}
+            <div className="h-60 bg-black rounded-lg overflow-hidden">
+              <img
+                src={item.image}
+                alt={item.alt}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                onError={(e) => {
+                  console.error(`Error loading image: ${item.image}`);
+                  e.target.src = '/images/perfume3.jpeg'; // Fallback image
+                }}
+              />
             </div>
           </div>
-        </div>
+        ))}
       </div>
+    </div>
+  </div>
+</div>
+
+
+
+      {/* Instagram Style Gallery */}
 
       {/* Rotating Brands Section */}
       <div className="w-full bg-pink-50 py-12 overflow-hidden">
@@ -569,7 +576,7 @@ const Home = () => {
                   {fragrance.name}
                 </h3>
                 <p className="mt-1 text-sm font-medium text-gray-900">
-                  ₹{fragrance.price}
+                  £{(fragrance.price * 0.0097).toFixed(2)}
                 </p>
                 <button className="mt-2 w-full bg-black text-white py-2 px-4 text-xs font-medium hover:bg-pink-500 transition-colors duration-200 rounded-md">
                   ADD TO CART

@@ -160,7 +160,7 @@ const Bestsellers = () => {
                   {/* Price and CTA */}
                   <div className="flex items-center justify-between pt-2">
                     <span className="text-lg font-semibold text-gray-900">
-                      ₹{product.price}
+                      £{(product.price * 0.0096).toFixed(2)}
                     </span>
                     <button 
                       onClick={(e) => handleAddToCart(e, product)}
@@ -213,7 +213,7 @@ const Bestsellers = () => {
             </svg>
           </div>
           <h3 className="text-lg font-medium text-gray-900 mb-2">Free Shipping</h3>
-          <p className="text-gray-600">On orders over ₹999</p>
+          <p className="text-gray-600">On orders over £9.99</p>
         </div>
       </div>
     </div>

@@ -170,7 +170,7 @@ const Shop = () => {
                         ))}
                       </div>
                       <div className="mt-2">
-                        <span className="text-lg font-medium text-gray-900">₹{product.price}</span>
+                        <span className="text-lg font-medium text-gray-900">£{(product.price * 0.0096).toFixed(2)}</span>
                       </div>
                       <button 
                         onClick={(e) => handleAddToCart(e, product)}
