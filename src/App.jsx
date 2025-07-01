@@ -10,8 +10,13 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Bestsellers from './pages/Bestsellers'
 import GiftSets from './pages/GiftSets'
+import CreatorZone from './components/CreatorZone'
+import AddProduct from './pages/creator/AddProduct'
+import ManageOrders from './pages/creator/ManageOrders'
+import Inventory from './pages/creator/Inventory'
 import { SearchProvider } from './context/SearchContext'
 import { CartProvider } from './context/CartContext'
+import './App.css'
 
 const App = () => {
   return (
@@ -33,6 +38,10 @@ const App = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/gift-sets" element={<GiftSets />} />
+                <Route path="/creator" element={<CreatorZone />} />
+                <Route path="/creator/add-product" element={<AddProduct />} />
+                <Route path="/creator/orders" element={<ManageOrders />} />
+                <Route path="/creator/inventory" element={<Inventory />} />
               </Routes>
             </main>
             <Footer />
