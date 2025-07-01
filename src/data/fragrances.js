@@ -3,10 +3,13 @@ import oxford from '../assets/oxfordblue.jpeg';
 import midnight from '../assets/midnight.jpeg';
 import nacture from '../assets/nacture.jpeg';
 import middush from '../assets/Midashrush.jpeg';
-import perfume3 from '../assets/perfume3.jpeg';
-import perfume4 from '../assets/perfume4.jpg';
-import perfume5 from '../assets/perfume5.webp';
-import luxuryPerfume from '../assets/Luxuryperfume.jpeg';
+import creamCloud from '../assets/creamcloud.png';
+import velvetHeel from '../assets/velvet.png';
+import cottonCandyKiss from '../assets/cotton.png';
+import crushAmour from '../assets/crush.png';
+import lumiereBelle from '../assets/lumiere.png';
+import sugarOud from '../assets/sugarguid.png';
+import parisianMuse from '../assets/parisian.png';
 
 export const fragranceCollections = {
   mens: [
@@ -92,168 +95,126 @@ export const fragranceCollections = {
   womens: [
     {
       id: 'w1',
-      name: 'Midnight Bloom',
-      description: 'Sweet fruits meet deep coffee & vanilla.',
-      fullDescription: 'A seductive contrast of bright pear and pink pepper with a bold coffee heart, softened by sweet vanilla and woods.',
-      notes: {
-        top: ['Pear', 'Pink Pepper', 'Orange Blossom'],
-        heart: ['Coffee', 'Jasmine', 'Bitter Almond', 'Licorice'],
-        base: ['Vanilla', 'Patchouli', 'Cedar', 'Cashmere Wood']
-      },
-      family: 'Gourmand Floral',
-      vibe: ['Sensual', 'Addictive', 'Glamorous'],
-      image: perfume3,
-      price: 899,
-      isBestseller: true,
-      rating: 4.9,
-      reviews: 312
-    },
-    {
-      id: 'w2',
       name: 'Velvet Heel',
       description: 'Red berries, blooming rose, warm vanilla.',
       fullDescription: 'This modern floral scent opens with juicy litchi and red currant, centering around a lush rose and grounded in creamy vanilla and vetiver.',
       notes: {
-        top: ['Litchi', 'Red Currant'],
+        top: ['Litchi', 'Rose', 'Vetiver'],
         heart: ['Rose'],
         base: ['Vanilla', 'Vetiver']
       },
       family: 'Floral Fruity',
       vibe: ['Elegant', 'Playful', 'Bold'],
-      image: perfume4,
+      image: velvetHeel,
       price: 799,
       rating: 4.6,
       reviews: 178
     },
     {
-      id: 'w3',
+      id: 'w2',
       name: 'Crush Amour',
-      description: 'A fruity floral explosion with a soft finish.',
-      fullDescription: 'Bursting with tropical fruit and sweet florals, this youthful scent is balanced by a soft musk and earthy base.',
+      description: 'A fruity floral explosion with passion fruit and jasmine.',
+      fullDescription: 'A vibrant blend featuring passion fruit, jasmine, and musk for a romantic and enchanting experience.',
       notes: {
-        top: ['Passion Fruit', 'Pineapple', 'Grapefruit', 'Strawberry'],
-        heart: ['Jasmine', 'Red Berries', 'Lily of the Valley'],
-        base: ['Musk', 'Oakmoss', 'Woody Notes']
+        top: ['Passion Fruit'],
+        heart: ['Jasmine'],
+        base: ['Musk']
       },
       family: 'Fruity Floral',
-      vibe: ['Vibrant', 'Flirty', 'Radiant'],
-      image: perfume5,
+      vibe: ['Romantic', 'Fresh', 'Enchanting'],
+      image: crushAmour,
       price: 799,
-      rating: 4.5,
-      reviews: 145
+      rating: 4.7,
+      reviews: 156
+    },
+    {
+      id: 'w3',
+      name: 'Lumiere Belle',
+      description: 'Elegant praline, vanilla, and iris blend.',
+      fullDescription: 'A luminous, feminine scent blending elegant florals with sweet praline and warm vanilla for a lasting impression.',
+      notes: {
+        top: ['Praline'],
+        heart: ['Vanilla'],
+        base: ['Iris']
+      },
+      family: 'Floral Gourmand',
+      vibe: ['Radiant', 'Romantic', 'Uplifting'],
+      image: lumiereBelle,
+      price: 899,
+      rating: 4.8,
+      reviews: 203
     },
     {
       id: 'w4',
       name: 'Parisian Muse',
-      description: 'Elegant florals and soft earthy depth.',
-      fullDescription: 'Sophisticated and timeless, this scent opens with citrus, blooms into soft rose and jasmine, and lingers with patchouli and warm musk.',
+      description: 'Sophisticated bergamot, jasmine, and patchouli.',
+      fullDescription: 'A chic Parisian-inspired fragrance combining fresh bergamot with elegant jasmine and grounding patchouli.',
       notes: {
-        top: ['Orange', 'Bergamot', 'Grapefruit'],
-        heart: ['Rose', 'Jasmine', 'Litchi'],
-        base: ['Patchouli', 'Vanilla', 'Musk', 'Vetiver']
+        top: ['Bergamot'],
+        heart: ['Jasmine'],
+        base: ['Patchouli']
       },
       family: 'Chypre Floral',
-      vibe: ['Chic', 'Modern', 'Feminine'],
-      image: luxuryPerfume,
+      vibe: ['Chic', 'Sophisticated', 'Timeless'],
+      image: parisianMuse,
       price: 899,
       isBestseller: true,
-      rating: 4.8,
-      reviews: 234
-    },
-    {
-      id: 'w5',
-      name: 'Lumiere Belle',
-      description: 'Soft florals & praline on a sweet base.',
-      fullDescription: 'A luminous, feminine scent blending elegant florals with sweet praline and warm vanilla for a lasting impression.',
-      notes: {
-        top: ['Pear', 'Blackcurrant'],
-        heart: ['Iris', 'Jasmine', 'Orange Blossom'],
-        base: ['Praline', 'Patchouli', 'Tonka Bean', 'Vanilla']
-      },
-      family: 'Floral Gourmand',
-      vibe: ['Radiant', 'Romantic', 'Uplifting'],
-      image: '/images/lumiere-belle.jpg',
-      price: 899
+      rating: 4.9,
+      reviews: 245
     }
   ],
   sugar: [
     {
       id: 's1',
       name: 'Sugar Oud',
-      description: 'Warm vanilla, brown sugar, and golden amber.',
-      fullDescription: 'A decadent fusion of jasmine and vanilla orchid at the top, mellowed by sweet tonka and brown sugar, with a cozy amber-musk finish.',
+      description: 'Sweet vanilla orchid and amber blend.',
+      fullDescription: 'A luxurious combination of vanilla orchid, brown sugar, and amber for a warm, inviting scent.',
       notes: {
-        top: ['Vanilla Orchid', 'Jasmine'],
-        heart: ['Brown Sugar', 'Tonka Bean'],
-        base: ['Amber', 'Patchouli', 'Musk']
+        top: ['Vanilla Orchid'],
+        heart: ['Brown Sugar'],
+        base: ['Amber']
       },
       family: 'Gourmand Amber',
-      vibe: ['Cozy', 'Luxe', 'Addictive'],
-      image: perfume3,
+      vibe: ['Sweet', 'Warm', 'Luxurious'],
+      image: sugarOud,
       price: 799,
-      isBestseller: true,
       rating: 4.7,
-      reviews: 189
+      reviews: 167
     },
     {
       id: 's2',
       name: 'Cream Cloud',
-      description: 'A dreamy, airy blend of sweets and musk.',
-      fullDescription: 'Fluffy whipped cream and praline meet delicate florals and tropical coconut, grounded by a soft, comforting base of musk and woods.',
+      description: 'Dreamy lavender and whipped cream delight.',
+      fullDescription: 'A heavenly blend of lavender, whipped cream, and musk creating a dreamy, comforting aroma.',
       notes: {
-        top: ['Pear', 'Lavender', 'Bergamot'],
-        heart: ['Coconut', 'Whipped Cream', 'Praline', 'Vanilla Orchid'],
-        base: ['Vanilla', 'Musk', 'Woody Notes']
+        top: ['Lavender'],
+        heart: ['Whipped Cream'],
+        base: ['Musk']
       },
       family: 'Sweet Floral',
-      vibe: ['Soft', 'Playful', 'Airy'],
-      image: '/images/cream-cloud.jpg',
-      price: 799
+      vibe: ['Dreamy', 'Comforting', 'Soft'],
+      image: creamCloud,
+      price: 799,
+      isBestseller: true,
+      rating: 4.8,
+      reviews: 189
     },
     {
       id: 's3',
       name: 'Cotton Candy Kiss',
-      description: 'Candy-coated fruits on a sugar-spun base.',
-      fullDescription: 'This nostalgic scent swirls vibrant citrus and berries with sugary cotton candy and finishes in warm vanilla caramel delight.',
+      description: 'Sweet bergamot and cotton candy fusion.',
+      fullDescription: 'A playful mix of bergamot, cotton candy, and strawberry for a delightfully sweet experience.',
       notes: {
-        top: ['Orange', 'Bergamot', 'Fig Leaves'],
-        heart: ['Cotton Candy', 'Licorice', 'Red Berries', 'Strawberry'],
-        base: ['Caramel', 'Musk', 'Vanilla', 'Tonka Bean']
+        top: ['Bergamot'],
+        heart: ['Cotton Candy'],
+        base: ['Strawberry']
       },
       family: 'Sweet Fruity',
-      vibe: ['Flirty', 'Sweet', 'Fun-loving'],
-      image: '/images/cotton-candy-kiss.jpg',
-      price: 799
-    },
-    {
-      id: 's4',
-      name: 'Marshmallow Musk',
-      description: 'Sugar and floral harmony on a musky base.',
-      fullDescription: 'A sensual and sweet blend of orange blossom, jasmine, and honeysuckle, layered over warm vanilla, caramel, and soft musks.',
-      notes: {
-        top: ['Neroli', 'Bergamot', 'Pink Pepper', 'Coriander'],
-        heart: ['Orange Blossom', 'Honeysuckle', 'Jasmine', 'Rose'],
-        base: ['Sugar', 'Vanilla', 'Caramel', 'Musk', 'Labdanum']
-      },
-      family: 'Floral Gourmand',
-      vibe: ['Sweet', 'Soft', 'Captivating'],
-      image: '/images/marshmallow-musk.jpg',
-      price: 799
-    },
-    {
-      id: 's5',
-      name: 'Caramel Rouge',
-      description: 'Smooth caramel with powdery musk and warm vanilla.',
-      fullDescription: 'Simple yet luxurious, this fragrance opens with rich caramel and melts into soft musk and sensual vanilla-benzoin.',
-      notes: {
-        top: ['Caramel'],
-        heart: ['Musk', 'Powdery Notes'],
-        base: ['Vanilla', 'Benzoin']
-      },
-      family: 'Gourmand Oriental',
-      vibe: ['Warm', 'Feminine', 'Cozy'],
-      image: '/images/caramel-rouge.jpg',
-      price: 799
+      vibe: ['Playful', 'Sweet', 'Fun'],
+      image: cottonCandyKiss,
+      price: 799,
+      rating: 4.6,
+      reviews: 145
     }
   ]
 };

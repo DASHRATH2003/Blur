@@ -93,7 +93,7 @@ const Home = () => {
             <img
               src={fragrance.image}
               alt={fragrance.name}
-              className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-300"
+              className="w-full h-full object-contain transition-all duration-500 ease-out hover:scale-[1.03]"
             />
           </div>
 
@@ -397,7 +397,7 @@ const Home = () => {
                 <div className="inline-flex space-x-4 md:space-x-8 pb-4">
                   {allFragrances.map((fragrance) => (
                     <div key={fragrance.id} className="relative">
-                      <span className="absolute top-2 left-2 bg-black/75 text-white px-3 py-1 text-xs rounded-full">
+                      <span className="absolute top-4 left-4 bg-black text-white px-4 py-1.5 text-sm font-medium rounded-full z-10 shadow-md">
                         {fragrance.collection}
                       </span>
                       <FragranceCard fragrance={fragrance} />
@@ -556,36 +556,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 overflow-x-auto">
-        <div className="flex gap-6 w-max">
-          {allFragrances.slice(0, 6).map((fragrance) => (
-            <Link
-              key={fragrance.id}
-              to={`/product/${fragrance.id}`}
-              className="min-w-[250px] group"
-            >
-              <div className="bg-[#FFF5F7] rounded-lg p-4 aspect-square flex items-center justify-center">
-                <img
-                  src={fragrance.image}
-                  alt={fragrance.name}
-                  className="w-full h-full object-contain transform group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="mt-4 text-center">
-                <h3 className="text-sm font-medium text-gray-900 group-hover:text-pink-500 transition-colors duration-200">
-                  {fragrance.name}
-                </h3>
-                <p className="mt-1 text-sm font-medium text-gray-900">
-                  £{(fragrance.price * 0.0097).toFixed(2)}
-                </p>
-                <button className="mt-2 w-full bg-black text-white py-2 px-4 text-xs font-medium hover:bg-pink-500 transition-colors duration-200 rounded-md">
-                  ADD TO CART
-                </button>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
+     
 
       {/* Customer Reviews Section */}
       
