@@ -6,23 +6,7 @@ import {
   PlayIcon,
 } from "@heroicons/react/24/outline";
 import { fragranceCollections } from "../data/fragrances";
-import homepage1 from "../assets/homepage1.webp";
-import homepage2 from "../assets/homepage2.webp";
-import homepage3 from "../assets/homepage3.webp";
-import homepage4 from "../assets/homepage4.webp";
 import { PlayIcon as SolidPlayIcon } from "@heroicons/react/24/solid";
-import discoveryImg from "../assets/Discovery.jpg";
-import luxuryImg from "../assets/Laxury.jpeg";
-import foreveryImg from "../assets/Forevery.jpg";
-import loveImg from "../assets/love.webp";
-import perfume1 from "../assets/perfumee2.jpg";
-import perfume2 from "../assets/perfume3.jpeg";
-import perfume3 from "../assets/perfume4.jpg";
-import perfume4 from "../assets/perfume5.webp";
-import perfume5 from "../assets/Luxuryperfume.jpeg";
-import perfume6 from "../assets/Midashrush.jpeg";
-import perfume7 from "../assets/midnight.jpeg";
-import perfume8 from "../assets/nacture.jpeg";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -44,24 +28,24 @@ const Home = () => {
       title: "Discover Your Signature Scent",
       description:
         "Explore our collection of unique fragrances crafted to express your personality.",
-      image: discoveryImg,
+      image: "/images/Discovery.jpg",
     },
     {
       title: "Luxury in Every Drop",
       description:
         "Experience the art of perfumery with our premium collection.",
-      image: luxuryImg,
+      image: "/images/Laxury.jpeg",
     },
     {
       title: "For Every Moment",
       description:
         "From day to night, find the perfect scent for every occasion.",
-      image: foreveryImg,
+      image: "/images/Forevery.jpg",
     },
     {
       title: "Crafted with Love",
       description: "Each fragrance tells a story, what will yours be?",
-      image: loveImg,
+      image: "/images/love.webp",
     },
   ];
 
@@ -153,10 +137,10 @@ const Home = () => {
 
   // Homepage images array
   const homepageImages = [
-    { image: homepage1, alt: "Homepage 1" },
-    { image: homepage2, alt: "Homepage 2" },
-    { image: homepage3, alt: "Homepage 3" },
-    { image: homepage4, alt: "Homepage 4" },
+    { image: "/images/homepage1.webp", alt: "Homepage 1" },
+    { image: "/images/homepage2.webp", alt: "Homepage 2" },
+    { image: "/images/homepage3.webp", alt: "Homepage 3" },
+    { image: "/images/homepage4.webp", alt: "Homepage 4" },
   ];
 
   // Brand logos data
@@ -176,7 +160,7 @@ const Home = () => {
     {
       name: "A A R T I",
       title: "LOVE THE FORMULA",
-      image: "/src/assets/perfume3.jpeg",
+      image: "/images/perfume3.jpeg",
       quotes: [
         "Call me daddy has the perfect shades for day and night looks.",
         "Branding, formulas, colors everything is on POINT!"
@@ -185,7 +169,7 @@ const Home = () => {
     {
       name: "SARAH M.",
       title: "AMAZING FRAGRANCE",
-      image: "/src/assets/perfume4.jpg",
+      image: "/images/perfume4.jpg",
       quotes: [
         "The scent is absolutely divine and long-lasting.",
         "The packaging is luxurious and elegant!"
@@ -194,7 +178,7 @@ const Home = () => {
     {
       name: "JESSICA K.",
       title: "PERFECT CHOICE",
-      image: "/src/assets/perfume5.webp",
+      image: "/images/perfume5.webp",
       quotes: [
         "This has become my signature scent.",
         "I get compliments everywhere I go!"
@@ -295,18 +279,18 @@ const Home = () => {
   };
 
   const instagramImages = [
-    { src: homepage1, alt: "Instagram post 1" },
-    { src: homepage2, alt: "Instagram post 2" },
-    { src: homepage3, alt: "Instagram post 3" },
-    { src: homepage4, alt: "Instagram post 4" },
-    { src: perfume2, alt: "Instagram post 5" },
-    { src: perfume3, alt: "Instagram post 6" },
-    { src: perfume1, alt: "Instagram post 7" },
-    { src: perfume4, alt: "Instagram post 8" },
-    { src: perfume5, alt: "Instagram post 9" },
-    { src: perfume6, alt: "Instagram post 10" },
-    { src: perfume7, alt: "Instagram post 11" },
-    { src: perfume8, alt: "Instagram post 12" }
+    { src: '/images/homepage1.webp', alt: 'Instagram post 1' },
+    { src: '/images/homepage2.webp', alt: 'Instagram post 2' },
+    { src: '/images/homepage3.webp', alt: 'Instagram post 3' },
+    { src: '/images/homepage4.webp', alt: 'Instagram post 4' },
+    { src: '/images/perfume3.jpeg', alt: 'Instagram post 5' },
+    { src: '/images/perfume4.jpg', alt: 'Instagram post 6' },
+    { src: '/images/perfumee2.jpg', alt: 'Instagram post 7' },
+    { src: '/images/perfume5.webp', alt: 'Instagram post 8' },
+    { src: '/images/Luxuryperfume.jpeg', alt: 'Instagram post 9' },
+    { src: '/images/Midashrush.jpeg', alt: 'Instagram post 10' },
+    { src: '/images/midnight.jpeg', alt: 'Instagram post 11' },
+    { src: '/images/nacture.jpeg', alt: 'Instagram post 12' }
   ];
 
   // Filter categories
@@ -513,7 +497,7 @@ const Home = () => {
           {!showVideo && (
             <div className="relative">
               <div className="aspect-video bg-gradient-to-r from-pink-100 to-purple-100 flex items-center justify-center">
-                <div className="absolute inset-0 bg-[url('/src/assets/Luxuryperfume.jpeg')] bg-cover bg-center opacity-20"></div>
+                <div className="absolute inset-0 bg-[url('/images/Luxuryperfume.jpeg')] bg-cover bg-center opacity-20"></div>
                 <div className="relative z-10 text-center p-8">
                   <div className="mb-6">
                     <div className="w-20 h-20 rounded-full bg-white bg-opacity-90 mx-auto flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
@@ -608,7 +592,12 @@ const Home = () => {
               className="flex transition-transform duration-500 ease-out h-full"
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
             >
-              {[perfume1, perfume2, perfume3, perfume4].map((image, index) => (
+              {[
+                '/images/perfumee2.jpg',
+                '/images/perfume3.jpeg',
+                '/images/perfume4.jpg',
+                '/images/perfume5.webp'
+              ].map((image, index) => (
                 <div key={index} className="w-full h-full flex-shrink-0">
                   <img
                     src={image}
@@ -716,7 +705,7 @@ const Home = () => {
               <div className="text-center">
                 <div className="w-32 h-32 mx-auto mb-4 bg-pink-50 rounded-full overflow-hidden p-4">
                   <img
-                    src="/src/assets/perfume5.webp"
+                    src="/images/perfumee2.jpg"
                     alt="Jojoba Oil"
                     className="w-full h-full object-cover rounded-full"
                   />
@@ -731,7 +720,7 @@ const Home = () => {
               <div className="text-center">
                 <div className="w-32 h-32 mx-auto mb-4 bg-pink-50 rounded-full overflow-hidden p-4">
                   <img
-                    src="/src/assets/perfumee2.jpg"
+                    src="/images/perfume3.jpeg"
                     alt="Avacado Oil"
                     className="w-full h-full object-cover rounded-full"
                   />
@@ -746,7 +735,7 @@ const Home = () => {
               <div className="text-center">
                 <div className="w-32 h-32 mx-auto mb-4 bg-pink-50 rounded-full overflow-hidden p-4">
                   <img
-                    src="/src/assets/perfume3.jpeg"
+                    src="/images/perfume4.jpg"
                     alt="Ozokorite"
                     className="w-full h-full object-cover rounded-full"
                   />
@@ -761,7 +750,7 @@ const Home = () => {
               <div className="text-center">
                 <div className="w-32 h-32 mx-auto mb-4 bg-pink-50 rounded-full overflow-hidden p-4">
                   <img
-                    src="/src/assets/perfume4.jpg"
+                    src="/images/perfume5.webp"
                     alt="Shea Butter"
                     className="w-full h-full object-cover rounded-full"
                   />

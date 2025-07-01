@@ -19,7 +19,7 @@ const GiftSets = () => {
         name: 'The Royal Collection',
         price: 12999,
         description: 'Our most prestigious collection featuring three full-size signature fragrances.',
-        image: '/src/assets/Luxuryperfume.jpeg',
+        image: '/images/Luxuryperfume.jpeg',
         includes: ['Midnight Mystique', 'Royal Oud', 'Golden Amber'],
         features: ['Premium Gift Box', 'Certificate of Authenticity', 'Luxury Gift Wrap']
       },
@@ -28,7 +28,7 @@ const GiftSets = () => {
         name: 'The Exclusive Edition',
         price: 15999,
         description: 'Limited edition set with rare and exclusive fragrances.',
-        image: '/src/assets/midnight.jpeg',
+        image: '/images/midnight.jpeg',
         includes: ['Rare Rose', 'Precious Oud', 'Imperial Saffron'],
         features: ['Numbered Edition', 'Wooden Display Box', 'VIP Card']
       }

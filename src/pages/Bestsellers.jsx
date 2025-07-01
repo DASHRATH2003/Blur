@@ -113,7 +113,7 @@ const Bestsellers = () => {
                     className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
                     onError={(e) => {
                       e.target.onerror = null;
-                      e.target.src = '/src/assets/perfume3.jpeg'; // Fallback image
+                      e.target.src = '/images/perfume3.jpeg'; // Updated fallback image path
                     }}
                   />
                 </div>
