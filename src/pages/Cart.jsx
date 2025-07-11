@@ -1,14 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { TrashIcon, MinusIcon, PlusIcon } from '@heroicons/react/24/outline';
+import { useAuth } from '../context/AuthContext';
+import toast from 'react-hot-toast';
 
 const Cart = () => {
+  const navigate = useNavigate();
   const { cartItems, removeFromCart, updateQuantity, getTotalPrice, clearCart } = useCart();
+  const { isAuthenticated } = useAuth();
 
   // Convert rupees to pounds
   const convertToPounds = (rupees) => {
     return (rupees * 0.0096).toFixed(2);
+  };
+
+  const handleCheckout = () => {
+    if (!isAuthenticated) {
+      toast.error('Please login to proceed with checkout');
+      navigate('/login');
+      return;
+    }
+    navigate('/checkout');
   };
 
   if (cartItems.length === 0) {
@@ -134,8 +147,12 @@ const Cart = () => {
                 </div>
               </div>
 
-              <button className="w-full bg-black text-white py-3 rounded-md font-medium hover:bg-pink-500 transition-colors duration-200">
+              <button 
+                onClick={handleCheckout}
+                className="w-full bg-black text-white py-3 rounded-md font-medium hover:bg-pink-500 transition-colors duration-200"
+              >
                 Proceed to Checkout
+                <p className="text-sm font-normal text-gray-300">Get Extra 5% Off on Pre-Paid</p>
               </button>
 
               <Link

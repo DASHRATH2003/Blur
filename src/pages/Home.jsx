@@ -7,6 +7,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { fragranceCollections } from "../data/fragrances";
 import { PlayIcon as SolidPlayIcon } from "@heroicons/react/24/solid";
+import { useCart } from "../context/CartContext";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -22,6 +23,7 @@ const Home = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
   const [currentReview, setCurrentReview] = useState(0);
+  const { addToCart } = useCart();
 
   const slides = [
     {
@@ -52,7 +54,7 @@ const Home = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-    }, 7000);
+    }, 2000);
 
     return () => clearInterval(timer);
   }, [slides.length]);
@@ -84,40 +86,93 @@ const Home = () => {
     }
   }, [scrollPosition]);
 
-  const FragranceCard = ({ fragrance }) => (
-    <div className="w-[280px] md:w-[300px] group">
-      <Link to={`/product/${fragrance.id}`}>
+  const FragranceCard = ({ fragrance }) => {
+    const [isAdding, setIsAdding] = useState(false);
+    
+    const handleAddToCart = (e) => {
+      // If already adding, prevent multiple clicks
+      if (isAdding) return;
+
+      e.preventDefault();
+      e.stopPropagation();
+      
+      // Set loading state immediately
+      setIsAdding(true);
+      
+      try {
+        // Prepare cart item with all required data
+        const cartItem = {
+          id: fragrance.id,
+          name: fragrance.name,
+          price: fragrance.price,
+          image: typeof fragrance.image === 'string' ? fragrance.image : fragrance.image.src || fragrance.image,
+          quantity: 1,
+          description: fragrance.description
+        };
+        
+        // Add to cart immediately
+        addToCart(cartItem, 1);
+        
+        // Reset button state after a delay to prevent double-clicks
+        setTimeout(() => {
+          setIsAdding(false);
+        }, 800); // Increased to prevent rapid re-clicks
+      } catch (error) {
+        console.error('Error adding to cart:', error);
+        setIsAdding(false);
+      }
+    };
+
+    const imageUrl = typeof fragrance.image === 'string' ? fragrance.image : fragrance.image.src || fragrance.image;
+
+    return (
+      <div className="w-[280px] md:w-[300px] group">
         <div className="flex flex-col items-center">
-          {/* Image Container */}
-          <div className="w-full aspect-[1/1] bg-[#FFF5F7] rounded-lg overflow-hidden mb-3">
-            <img
-              src={fragrance.image}
-              alt={fragrance.name}
-              className="w-full h-full object-contain transition-all duration-500 ease-out hover:scale-[1.03]"
-            />
-          </div>
+          {/* Image Container - Link only on the image */}
+          <Link to={`/product/${fragrance.id}`} className="w-full">
+            <div className="w-full aspect-[1/1] bg-[#FFF5F7] rounded-lg overflow-hidden mb-3">
+              <img
+                src={imageUrl}
+                alt={fragrance.name}
+                className="w-full h-full object-contain transition-all duration-500 ease-out hover:scale-[1.03]"
+                loading="lazy"
+              />
+            </div>
+          </Link>
 
           {/* Product Info - Centered */}
           <div className="w-full text-center space-y-1.5">
-            <h3 className="text-base md:text-lg font-medium text-gray-900 group-hover:text-pink-500 transition-colors duration-200">
-              {fragrance.name}
-            </h3>
+            <Link to={`/product/${fragrance.id}`}>
+              <h3 className="text-base md:text-lg font-medium text-gray-900 group-hover:text-pink-500 transition-colors duration-200">
+                {fragrance.name}
+              </h3>
+            </Link>
             <p className="text-xs md:text-sm text-gray-500 line-clamp-2 px-2">
               {fragrance.description}
             </p>
             <div className="mt-2">
               <span className="text-base md:text-lg font-semibold text-gray-900">
-                £{(fragrance.price * 0.0097).toFixed(2)}
+                £{fragrance.price.toFixed(2)}
               </span>
             </div>
-            <button className="w-full bg-black text-white py-2 px-4 text-xs font-medium hover:bg-pink-500 transition-colors duration-200 rounded-md">
-              Add to Cart
-            </button>
           </div>
         </div>
-      </Link>
-    </div>
-  );
+        
+        <button 
+          onClick={handleAddToCart}
+          disabled={isAdding}
+          aria-label={isAdding ? 'Adding to cart...' : 'Add to cart'}
+          className={`w-full py-2 px-4 text-xs font-medium rounded-md mt-2 transition-all duration-150 select-none ${
+            isAdding 
+              ? 'bg-pink-500 text-white cursor-not-allowed opacity-90'
+              : 'bg-black text-white hover:bg-pink-500 active:scale-[0.98]'
+          }`}
+        >
+          {isAdding ? '✓ Added!' : 'Add to Cart'}
+        </button>
+      </div>
+    );
+  };
 
   // Combine all fragrances into a single array
   const allFragrances = [
@@ -131,7 +186,7 @@ const Home = () => {
     })),
     ...fragranceCollections.sugar.map((item) => ({
       ...item,
-      collection: "Sugar Muse",
+      collection: "Sugar",
     })),
   ];
 
@@ -191,7 +246,7 @@ const Home = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentReview((prev) => (prev === reviews.length - 1 ? 0 : prev + 1));
-    }, 5000);
+    }, 2000);
 
     return () => clearInterval(timer);
   }, []);

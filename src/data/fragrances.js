@@ -26,10 +26,11 @@ export const fragranceCollections = {
       family: 'Fruity Woody',
       vibe: ['Sophisticated', 'Powerful', 'Timeless'],
       image: regent1,
-      price: 999,
+      price: 19.98,
       isBestseller: true,
       rating: 4.8,
-      reviews: 256
+      reviews: 256,
+      color: 'Black'
     },
     {
       id: 'm2',
@@ -44,7 +45,8 @@ export const fragranceCollections = {
       family: 'Aromatic Woody',
       vibe: ['Clean', 'Confident', 'Refined'],
       image: oxford,
-      price: 899
+      price: 8.99,
+      color: 'Oxford Blue'
     },
     {
       id: 'm3',
@@ -59,7 +61,8 @@ export const fragranceCollections = {
       family: 'Aromatic Fresh',
       vibe: ['Adventurous', 'Rugged', 'Alluring'],
       image: midnight,
-      price: 899
+      price: 8.99,
+      color: 'Midnight Blue'
     },
     {
       id: 'm4',
@@ -74,7 +77,8 @@ export const fragranceCollections = {
       family: 'Oriental Sweet',
       vibe: ['Bold', 'Seductive', 'Addictive'],
       image: nacture,
-      price: 999
+      price: 9.99,
+      color: 'Deep Purple'
     },
     {
       id: 'm5',
@@ -89,7 +93,8 @@ export const fragranceCollections = {
       family: 'Spicy Leather',
       vibe: ['Daring', 'Energetic', 'Irresistible'],
       image: middush,
-      price: 899
+      price: 8.99,
+      color: 'Gold'
     }
   ],
   womens: [
@@ -106,9 +111,10 @@ export const fragranceCollections = {
       family: 'Floral Fruity',
       vibe: ['Elegant', 'Playful', 'Bold'],
       image: velvetHeel,
-      price: 799,
+      price: 7.99,
       rating: 4.6,
-      reviews: 178
+      reviews: 178,
+      color: 'Ruby Red'
     },
     {
       id: 'w2',
@@ -123,9 +129,10 @@ export const fragranceCollections = {
       family: 'Fruity Floral',
       vibe: ['Romantic', 'Fresh', 'Enchanting'],
       image: crushAmour,
-      price: 799,
+      price: 7.99,
       rating: 4.7,
-      reviews: 156
+      reviews: 156,
+      color: 'Pink'
     },
     {
       id: 'w3',
@@ -140,9 +147,10 @@ export const fragranceCollections = {
       family: 'Floral Gourmand',
       vibe: ['Radiant', 'Romantic', 'Uplifting'],
       image: lumiereBelle,
-      price: 899,
+      price: 8.99,
       rating: 4.8,
-      reviews: 203
+      reviews: 203,
+      color: 'Pearl White'
     },
     {
       id: 'w4',
@@ -157,10 +165,11 @@ export const fragranceCollections = {
       family: 'Chypre Floral',
       vibe: ['Chic', 'Sophisticated', 'Timeless'],
       image: parisianMuse,
-      price: 899,
+      price: 8.99,
       isBestseller: true,
       rating: 4.9,
-      reviews: 245
+      reviews: 245,
+      color: 'Rose Gold'
     }
   ],
   sugar: [
@@ -177,9 +186,10 @@ export const fragranceCollections = {
       family: 'Gourmand Amber',
       vibe: ['Sweet', 'Warm', 'Luxurious'],
       image: sugarOud,
-      price: 799,
+      price: 7.99,
       rating: 4.7,
-      reviews: 167
+      reviews: 167,
+      color: 'Caramel'
     },
     {
       id: 's2',
@@ -194,10 +204,11 @@ export const fragranceCollections = {
       family: 'Sweet Floral',
       vibe: ['Dreamy', 'Comforting', 'Soft'],
       image: creamCloud,
-      price: 799,
+      price: 7.99,
       isBestseller: true,
       rating: 4.8,
-      reviews: 189
+      reviews: 189,
+      color: 'Cream'
     },
     {
       id: 's3',
@@ -212,9 +223,10 @@ export const fragranceCollections = {
       family: 'Sweet Fruity',
       vibe: ['Playful', 'Sweet', 'Fun'],
       image: cottonCandyKiss,
-      price: 799,
+      price: 7.99,
       rating: 4.6,
-      reviews: 145
+      reviews: 145,
+      color: 'Cotton Candy Pink'
     }
   ]
 };

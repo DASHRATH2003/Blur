@@ -8,6 +8,7 @@ const Shop = () => {
   const [searchParams] = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('newest');
+  const [loadingStates, setLoadingStates] = useState({});
   const { searchQuery } = useSearch();
   const { addToCart } = useCart();
 
@@ -76,7 +77,7 @@ const Shop = () => {
     { id: 'all', name: 'All Collections' },
     { id: 'mens', name: "Men's Collection" },
     { id: 'womens', name: "Women's Collection" },
-    { id: 'sugar', name: 'Sugar Muse Collection' }
+    { id: 'sugar', name: 'Sugar Collection' }
   ];
 
   const sortOptions = [
@@ -86,9 +87,32 @@ const Shop = () => {
     { value: 'name-asc', label: 'Name: A to Z' }
   ];
 
-  const handleAddToCart = (e, product) => {
+  const handleAddToCart = async (e, product) => {
     e.preventDefault();
-    addToCart(product);
+    e.stopPropagation();
+
+    // Set loading state for this specific product
+    setLoadingStates(prev => ({ ...prev, [product.id]: true }));
+
+    try {
+      // Add to cart
+      addToCart({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: typeof product.image === 'string' ? product.image : product.image.src || product.image,
+        quantity: 1,
+        description: product.description
+      });
+
+      // Reset loading state after a short delay for better UX
+      setTimeout(() => {
+        setLoadingStates(prev => ({ ...prev, [product.id]: false }));
+      }, 300);
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      setLoadingStates(prev => ({ ...prev, [product.id]: false }));
+    }
   };
 
   return (
@@ -142,45 +166,52 @@ const Shop = () => {
           <div className="inline-flex space-x-8 pb-4">
             {products.map((product) => (
               <div key={product.id} className="w-[300px] flex-shrink-0">
-                <Link
-                  to={`/product/${product.id}`}
-                  className="group"
-                >
-                  <div className="relative">
-                    <div className="aspect-[3/4] bg-gray-100 rounded-lg overflow-hidden mb-4">
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                    <div className="flex flex-col space-y-2">
-                      <h3 className="text-lg font-medium text-gray-900 group-hover:text-pink-500 transition-colors duration-200">
-                        {product.name}
-                      </h3>
-                      <p className="text-sm text-gray-500">{product.description}</p>
-                      <div className="flex flex-wrap gap-2">
-                        {product.vibe && product.vibe.map((tag, idx) => (
-                          <span
-                            key={idx}
-                            className="px-2 py-1 bg-gray-100 text-xs text-gray-600 rounded-full"
-                          >
-                            {tag}
-                          </span>
-                        ))}
+                <div className="group">
+                  <Link
+                    to={`/product/${product.id}`}
+                    className="block"
+                  >
+                    <div className="relative">
+                      <div className="aspect-[3/4] bg-gray-100 rounded-lg overflow-hidden mb-4">
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
+                        />
                       </div>
-                      <div className="mt-2">
-                        <span className="text-lg font-medium text-gray-900">£{(product.price * 0.0096).toFixed(2)}</span>
+                      <div className="flex flex-col space-y-2">
+                        <h3 className="text-lg font-medium text-gray-900 group-hover:text-pink-500 transition-colors duration-200">
+                          {product.name}
+                        </h3>
+                        <p className="text-sm text-gray-500">{product.description}</p>
+                        <div className="flex flex-wrap gap-2">
+                          {product.vibe && product.vibe.map((tag, idx) => (
+                            <span
+                              key={idx}
+                              className="px-2 py-1 bg-gray-100 text-xs text-gray-600 rounded-full"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        <div className="mt-2">
+                          <span className="text-lg font-medium text-gray-900">£{product.price.toFixed(2)}</span>
+                        </div>
                       </div>
-                      <button 
-                        onClick={(e) => handleAddToCart(e, product)}
-                        className="mt-4 w-full bg-black text-white py-2 px-4 text-sm font-medium hover:bg-pink-500 transition-colors duration-200 rounded"
-                      >
-                        ADD TO CART
-                      </button>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                  <button 
+                    onClick={(e) => handleAddToCart(e, product)}
+                    disabled={loadingStates[product.id]}
+                    className={`mt-4 w-full py-2 px-4 text-sm font-medium rounded transition-all duration-200 ${
+                      loadingStates[product.id]
+                        ? 'bg-pink-500 text-white cursor-not-allowed opacity-75'
+                        : 'bg-black text-white hover:bg-pink-500'
+                    }`}
+                  >
+                    {loadingStates[product.id] ? 'ADDING...' : 'ADD TO CART'}
+                  </button>
+                </div>
               </div>
             ))}
           </div>
